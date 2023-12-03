@@ -1,14 +1,23 @@
 
-// task 3:
-function slugify(title) {
-  const lowercaseTitle = title.toLowerCase();
-  const words = lowercaseTitle.split(' ');
-  const slug = words.join('-');
-  return slug;
+// task 4.1:
+function isEnoughCapacity(products, containerSize) {
+  // Отримуємо масив ключів об'єкта products
+  const productNames = Object.keys(products);
+
+  // Отримуємо загальну кількість товарів у контейнері за допомогою reduce
+  const totalProducts = productNames.reduce((acc, productName) => {
+    // Отримуємо кількість товару за ключем productName
+    const quantity = products[productName];
+    // Додаємо кількість товару до акумулятора
+    return acc + quantity;
+  }, 0);
+
+  // Перевіряємо, чи загальна кількість товарів не перевищує розмір контейнера
+  return totalProducts <= containerSize;
 }
 
-// Перевірка роботи функції
-console.log(slugify("Arrays for begginers")); // "arrays-for-begginers"
-console.log(slugify("English for developer")); // "english-for-developer"
-console.log(slugify("Ten secrets of JavaScript")); // "ten-secrets-of-javascript"
-console.log(slugify("How to become a JUNIOR developer in TWO WEEKS")); // "how-to-become-a-junior-developer-in-two-weeks"
+// Перевірка коректності роботи функції
+console.log(isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8));  // true
+console.log(isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12));   // false
+console.log(isEnoughCapacity({ apples: 1, lime: 5, tomatos: 3 }, 14));   // true
+console.log(isEnoughCapacity({ apples: 18, potatos: 5, oranges: 2 }, 7)); // false

@@ -1,26 +1,29 @@
+// TASK 4.3:
+const profile = {
+  username: "Jacob",
+  playTime: 300,
 
-// TASK 3:
-function filterArray(numbers, value) {
-  let filteredArray = [];
+  // Метод для зміни імені користувача
+  changeUsername: function(newName) {
+    this.username = newName;
+  },
 
-  for (let i = 0; i < numbers.length; i++) {
-    const currentNumber = numbers[i];
+  // Метод для оновлення кількості годин гри
+  updatePlayTime: function(hours) {
+    this.playTime += hours;
+  },
 
-    if (currentNumber > value) {
-      filteredArray.push(currentNumber);
-    }
+  // Метод для отримання інформації про профіль
+  getInfo: function() {
+    return `${this.username} has ${this.playTime} active hours!`;
   }
+};
 
-  return filteredArray;
-}
+// Перевірка
+console.log(profile.getInfo()); // "Jacob has 300 active hours!"
 
-console.log(filterArray([1, 2, 3, 4, 5], 3)); // [4, 5]
-console.log(filterArray([1, 2, 3, 4, 5], 4)); // [5]
-console.log(filterArray([1, 2, 3, 4, 5], 5)); // []
-console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
-console.log(filterArray([12, 24, 8, 41, 76], 20)); // [24, 41, 76]
+profile.changeUsername("Marco");
+console.log(profile.getInfo()); // "Marco has 300 active hours!"
 
-// Виклик функції filterArray() з випадковим масивом і числом
-const randomArray = [8, 15, 3, 10, 22, 17];
-const randomValue = 12;
-console.log(filterArray(randomArray, randomValue));
+profile.updatePlayTime(20);
+console.log(profile.getInfo()); // "Marco has 320 active hours!"
